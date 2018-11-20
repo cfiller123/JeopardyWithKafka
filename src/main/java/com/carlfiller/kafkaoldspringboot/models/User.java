@@ -1,5 +1,6 @@
 package com.carlfiller.kafkaoldspringboot.models;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
@@ -23,12 +24,15 @@ public class User {
     private String pwHash;
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    private int score;
+
     public User() {
     }
 
     public User(String username, String password) {
         this.username = username;
         this.pwHash = hashPassword(password);
+        this.score = 0;
     }
 
     public String getUsername() {
@@ -39,6 +43,13 @@ public class User {
         return this.id;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public static String hashPassword(String password) {
         return encoder.encode(password);
