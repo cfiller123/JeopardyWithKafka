@@ -38,12 +38,11 @@ public class GetKafkaMessage {
         try {
             outerloop:
             while (true) {
-                ConsumerRecords<String, String> records = myConsumer.poll(10);
+                ConsumerRecords<String, String> records = myConsumer.poll(1000);
+                new Thread(new CreateKafkaMessage()).start();
                 for (ConsumerRecord<String, String> record : records) {
                     message = record.value();
-                    System.out.println("pre sync");
                     myConsumer.commitSync();
-                    System.out.println("post sync");
                     break outerloop;
                 }
             }

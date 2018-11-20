@@ -6,15 +6,15 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
 
-public class CreateKafkaMessage {
+public class CreateKafkaMessage implements Runnable {
 
-    public void createJson() {
+    public void run() {
         Properties props = new Properties();
-        String address = "18.223.107.7:9092";
+        String address = "localhost:9092";
         String valueSerializer = "org.apache.kafka.common.serialization.StringSerializer";
         String keySerializer = "org.apache.kafka.common.serialization.StringSerializer";
-        String topics = "test";
-        props.put("bootstrap-servers", address);
+        String topics = "Jeopardy   ";
+        props.put("bootstrap.servers", address);
         props.put("key.serializer", valueSerializer);
         props.put("value.serializer",keySerializer);
 
