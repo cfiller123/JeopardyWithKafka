@@ -18,13 +18,13 @@ public class CreateKafkaMessage {
         props.put("key.serializer", valueSerializer);
         props.put("value.serializer",keySerializer);
 
-        KafkaProducer<String, String> myProducer = new KafkaProducer<String, String>(props);
+        KafkaProducer<String, String> myProducer = new KafkaProducer<>(props);
 
         try {
             int counter = 0;
             while (counter < 1) {
                 String message = ReadFromJsonFile.returnJsonString();
-                myProducer.send(new ProducerRecord<String, String>("test",message));
+                myProducer.send(new ProducerRecord<>(topics,message));
                 counter ++;
             }
         } catch (Exception e) {
