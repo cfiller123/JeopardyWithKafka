@@ -14,7 +14,7 @@ public class GetKafkaMessage {
         String address = "localhost:9092";
         String valueDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
         String keyDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
-        String groupId = "testGroup";
+        String groupId = "testGroupTwo";
 
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, address);
@@ -37,7 +37,7 @@ public class GetKafkaMessage {
         try {
             outerloop:
             while (true) {
-                ConsumerRecords<String, String> records = myConsumer.poll(1000);
+                ConsumerRecords<String, String> records = myConsumer.poll(10);
                 for (ConsumerRecord<String, String> record : records) {
                     message = record.value();
                     System.out.println("pre sync");
