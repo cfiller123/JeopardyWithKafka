@@ -14,7 +14,7 @@ public class GetKafkaMessage {
         String address = "localhost:9092";
         String valueDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
         String keyDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
-        String groupId = "testGroupTwo";
+        String groupId = "testGroupThree";
 
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, address);

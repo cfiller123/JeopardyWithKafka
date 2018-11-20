@@ -1,6 +1,8 @@
 package com.carlfiller.kafkaoldspringboot.kafka;
 
+import com.carlfiller.kafkaoldspringboot.data.ReadFromJsonFile;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
 
@@ -18,6 +20,17 @@ public class CreateKafkaMessage {
 
         KafkaProducer<String, String> myProducer = new KafkaProducer<String, String>(props);
 
-//        Need to produce new question here
+        try {
+            int counter = 0;
+            while (counter < 1) {
+                String message = ReadFromJsonFile.returnJsonString();
+                myProducer.send(new ProducerRecord<String, String>("test",message));
+                counter ++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            myProducer.close();
+        }
     }
 }
