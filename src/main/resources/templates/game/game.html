@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+
+<body class="container">
+
+<h1 th:text="${title}">Broken Title</h1>
+
+<h2 th:text="${question}">Broken Question</h2>
+
+<h3 th:text="${value}">Broken Value</h3>
+
+<form method="post" style="max-width:600px;" th:action="@{/game/game}">
+    <div class="form-group">
+        <label th:for="userAnswer">Answer</label>
+        <input class="form-control" name="userAnswer" />
+    </div>
+    <input type="submit" value="Guess" />
+</form>
+
+<a href="/user/logout">Logout</a>
+
+
+</body>
+</html>
