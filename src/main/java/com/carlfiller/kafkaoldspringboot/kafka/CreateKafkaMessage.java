@@ -1,6 +1,8 @@
 package com.carlfiller.kafkaoldspringboot.kafka;
 
 import com.carlfiller.kafkaoldspringboot.data.ReadFromJsonFile;
+import com.carlfiller.kafkaoldspringboot.models.Question;
+import com.google.gson.Gson;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -13,7 +15,7 @@ public class CreateKafkaMessage implements Runnable {
         String address = "localhost:9092";
         String valueSerializer = "org.apache.kafka.common.serialization.StringSerializer";
         String keySerializer = "org.apache.kafka.common.serialization.StringSerializer";
-        String topics = "Jeopardy   ";
+        String topics = "Jeopardy";
         props.put("bootstrap.servers", address);
         props.put("key.serializer", valueSerializer);
         props.put("value.serializer",keySerializer);
@@ -23,8 +25,10 @@ public class CreateKafkaMessage implements Runnable {
         try {
             int counter = 0;
             while (counter < 1) {
-                String message = ReadFromJsonFile.returnJsonString();
-                myProducer.send(new ProducerRecord<>(topics,message));
+                Question message = ReadFromJsonFile.getQuestion();
+                Gson gsonObj = new Gson();
+                String jsonStr = gsonObj.toJson(message);
+                myProducer.send(new ProducerRecord<>(topics,jsonStr));
                 counter ++;
             }
         } catch (Exception e) {

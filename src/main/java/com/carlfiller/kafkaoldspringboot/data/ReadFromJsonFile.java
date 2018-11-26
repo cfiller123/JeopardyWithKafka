@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class ReadFromJsonFile {
 
-    public Question getQuestion() {
+    public static Question getQuestion() {
         String location = "C:\\Users\\CDF1104\\IdeaProjects\\kafka-old-springboot\\src\\main\\resources\\static\\JEOPARDY_QUESTIONS1.json";
         String json;
 
@@ -26,7 +26,7 @@ public class ReadFromJsonFile {
         return new Question();
     }
 
-    public String getJsonString() {
+    public static String getJsonString() {
         String location = "C:\\Users\\CDF1104\\IdeaProjects\\kafka-old-springboot\\src\\main\\resources\\static\\JEOPARDY_QUESTIONS1.json";
         String json;
 
@@ -43,10 +43,6 @@ public class ReadFromJsonFile {
         }
 
         return "";
-    }
-
-    public static String returnJsonString() {
-        return returnJsonString();
     }
 
 }

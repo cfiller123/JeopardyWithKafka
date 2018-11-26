@@ -1,6 +1,7 @@
 package com.carlfiller.kafkaoldspringboot.controllers;
 
 import com.carlfiller.kafkaoldspringboot.data.ReadFromKafkaMessage;
+import com.carlfiller.kafkaoldspringboot.models.Answer;
 import com.carlfiller.kafkaoldspringboot.models.Question;
 import com.carlfiller.kafkaoldspringboot.models.User;
 import org.springframework.stereotype.Controller;
@@ -26,25 +27,26 @@ public class GameController extends AbstractController {
         model.addAttribute("question","Question is: " + question.substring(1,question.length()-1));
         model.addAttribute("value", "Value: " + value);
         model.addAttribute("score",user.getUsername() + "'s score is: " + user.getScore());
+        model.addAttribute("answerObject", new Answer());
         return "game/game";
     }
 
     @RequestMapping(value = "game", method = RequestMethod.POST)
-    public String processGame(@ModelAttribute Question question, Model model, HttpServletRequest request) {
+    public String processGame(@ModelAttribute Answer userAnswer, Model model, HttpServletRequest request) {
         User user = getUserFromSession(request.getSession());
         User existingUser = userDao.findByUsername(user.getUsername());
-        if (question.getAnswer().equals(getAnswerFromSession(request.getSession()))) {
+        if (userAnswer.getAnswer().equals(getAnswerFromSession(request.getSession()))) {
             int oldScore = existingUser.getScore();
-            int newScore = oldScore + Integer.parseInt(question.getValue());
+            int newScore = oldScore + userAnswer.getValue();
             existingUser.setScore(newScore);
             userDao.save(existingUser);
-            return "game/game";
+            return "redirect:/game/game";
         }
         int oldScore = existingUser.getScore();
-        int newScore = oldScore - Integer.parseInt(question.getValue());
+        int newScore = oldScore - userAnswer.getValue();
         existingUser.setScore(newScore);
         userDao.save(existingUser);
-        return "game/game";
+        return "redirect:/game/game";
     }
 
 }

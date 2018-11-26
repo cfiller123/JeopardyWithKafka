@@ -11,13 +11,11 @@
 
 <p th:text="${value}">Broken Value</p>
 
-<form method="post" style="max-width:600px;" th:action="@{/game/game}" th:object="${question}">
+<form method="post" style="max-width:600px;" th:action="@{/game/game}" th:object="${answerObject}">
     <div class="form-group">
         <label th:for="userAnswer">Answer</label>
         <input class="form-control" th:field="*{answer}" />
     </div>
-    <input type="hidden" th:field="*{value}">
-    <input type="hidden" th:field="*{question}">
     <input type="submit" value="Guess" />
 </form>
 

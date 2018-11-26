@@ -22,12 +22,6 @@ public class Question {
         this.show_number = show_number;
     }
 
-    public Question(String question, String value, String answer) {
-        this.question = question;
-        this.answer = answer;
-        this.value = value;
-    }
-
     public String getCategory() {
         return category;
     }
