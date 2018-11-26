@@ -1,7 +1,5 @@
 package com.carlfiller.kafkaoldspringboot.kafka;
 
-import com.carlfiller.kafkaoldspringboot.models.Question;
-import com.google.gson.Gson;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

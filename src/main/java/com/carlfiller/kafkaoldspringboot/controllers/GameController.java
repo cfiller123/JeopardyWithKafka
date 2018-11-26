@@ -23,7 +23,8 @@ public class GameController extends AbstractController {
         String answer = jeopardy.getAnswer();
         String value = jeopardy.getValue();
         setAnswerInSession(request.getSession(), answer);
-        model.addAttribute("title", "Kafka Jeopardy! Our contestant is:" + user.getUsername());
+        setvalueInSession(request.getSession(),Integer.valueOf(value.substring(1)));
+        model.addAttribute("title", "Kafka Jeopardy! Our contestant is: " + user.getUsername());
         model.addAttribute("question","Question is: " + question.substring(1,question.length()-1));
         model.addAttribute("value", "Value: " + value);
         model.addAttribute("score",user.getUsername() + "'s score is: " + user.getScore());
@@ -34,16 +35,17 @@ public class GameController extends AbstractController {
     @RequestMapping(value = "game", method = RequestMethod.POST)
     public String processGame(@ModelAttribute Answer userAnswer, Model model, HttpServletRequest request) {
         User user = getUserFromSession(request.getSession());
-        User existingUser = userDao.findByUsername(user.getUsername());
+        User existingUser = userDao.findOne(user.getId());
+        int questionValue = getValueFromSession(request.getSession());
         if (userAnswer.getAnswer().equals(getAnswerFromSession(request.getSession()))) {
             int oldScore = existingUser.getScore();
-            int newScore = oldScore + userAnswer.getValue();
+            int newScore = oldScore + questionValue;
             existingUser.setScore(newScore);
             userDao.save(existingUser);
             return "redirect:/game/game";
         }
         int oldScore = existingUser.getScore();
-        int newScore = oldScore - userAnswer.getValue();
+        int newScore = oldScore - questionValue;
         existingUser.setScore(newScore);
         userDao.save(existingUser);
         return "redirect:/game/game";

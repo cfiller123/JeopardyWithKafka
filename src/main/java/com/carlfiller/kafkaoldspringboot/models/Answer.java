@@ -3,14 +3,11 @@ package com.carlfiller.kafkaoldspringboot.models;
 public class Answer {
     private String answer;
 
-    private int value;
-
     public Answer() {
     }
 
-    public Answer(String answer, int value) {
+    public Answer(String answer) {
         this.answer = answer;
-        this.value = value;
     }
 
     public String getAnswer() {
@@ -21,11 +18,4 @@ public class Answer {
         this.answer = answer;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
 }

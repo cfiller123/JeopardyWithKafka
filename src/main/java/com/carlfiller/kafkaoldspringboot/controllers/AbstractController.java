@@ -14,7 +14,9 @@ public abstract class AbstractController {
 
     public static final String userSessionKey = "user_id";
 
-    public static final String answerSessionKey= "answer";
+    public static final String answerSessionKey = "answer";
+
+    public static final String valueSessionKey = "value";
 
     protected User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
@@ -32,6 +34,15 @@ public abstract class AbstractController {
 
     protected void setAnswerInSession(HttpSession session, String answer) {
         session.setAttribute(answerSessionKey,answer);
+    }
+
+    protected int getValueFromSession(HttpSession session) {
+        int value = (Integer) session.getAttribute(valueSessionKey);
+        return value;
+    }
+
+    protected void setvalueInSession(HttpSession session, int value) {
+        session.setAttribute(valueSessionKey,value);
     }
 
     @ModelAttribute("user")
